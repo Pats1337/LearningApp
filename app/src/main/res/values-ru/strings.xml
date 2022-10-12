@@ -1,0 +1,4 @@
+<resources>
+    <string name="hello">Привет Мир! Это мой первый проект на Андроид, зацените!</string>
+    <string name="app_name">Учебное приложение</string>
+</resources>

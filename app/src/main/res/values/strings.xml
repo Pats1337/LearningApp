@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">LearningApp</string>
+    <string name="hello">Hello World! This is my first project on Android ever and I am going to enjoy it!</string>
 </resources>
