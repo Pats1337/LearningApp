@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/titleTextView"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:gravity="center"
-    android:text="@string/hello" />
+    android:text="@string/hello"
+    android:maxLines="1"
+    android:ellipsize="end"
+    android:paddingStart="@dimen/padding_small"
+    tools:ignore="RtlSymmetry"
+    tools:text="Some long text here"
+    android:textAppearance="@style/RedTitle"/>
