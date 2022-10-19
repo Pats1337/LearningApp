@@ -4,4 +4,6 @@
     and privacy policy</string>
     <string name="confidential_info">agreement</string>
     <string name="privacy_policy">privacy policy</string>
+    <string name="camera_icon">Camera icon</string>
+    <string name="hide_image">hide_image</string>
 </resources>
