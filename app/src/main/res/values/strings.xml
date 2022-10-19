@@ -6,4 +6,5 @@
     <string name="privacy_policy">privacy policy</string>
     <string name="camera_icon">Camera icon</string>
     <string name="hide_image">hide_image</string>
+    <string name="ic_content_description" />
 </resources>
