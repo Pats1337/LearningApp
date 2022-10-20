@@ -4,4 +4,6 @@
     <string name="confidential_info">условиями использования</string>
     <string name="privacy_policy">политикой конфиденциальности</string>
     <string name="login">Логин</string>
+    <string name="invalid_email_message">Некорректный адрес электронной почты</string>
+    <string name="valid_email_message">Корректный адрес электронной почты</string>
 </resources>

@@ -8,4 +8,6 @@
     <string name="hide_image">hide_image</string>
     <string name="ic_content_description" />
     <string name="login">Login</string>
+    <string name="invalid_email_message">Incorrect email address</string>
+    <string name="valid_email_message">Correct email address</string>
 </resources>
