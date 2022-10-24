@@ -1,6 +1,7 @@
 package com.github.pats1337.learningapp
 
 
+import android.app.Activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
@@ -8,6 +9,7 @@ import android.text.SpannableString
 import android.text.TextWatcher
 import android.util.Log
 import android.util.Patterns.EMAIL_ADDRESS
+import android.view.View
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.Toast
@@ -24,11 +26,14 @@ class MainActivity : AppCompatActivity() {
 
         val textInputLayout = findViewById<TextInputLayout>(R.id.textInputLayout)
         val textInputEditText = findViewById<TextInputEditText>(R.id.textInputEditText)
+        val progressBar = findViewById<View>(R.id.progressBar)
 
         val loginButton = findViewById<Button>(R.id.loginButton)
         loginButton.setOnClickListener {
             if (EMAIL_ADDRESS.matcher(textInputEditText.text.toString()).matches()) {
-                Snackbar.make(loginButton, "Go to post login", Snackbar.LENGTH_LONG).show()
+                loginButton.isEnabled = false
+                progressBar.visibility = View.VISIBLE
+                Snackbar.make(loginButton, "Go to postLogin", Snackbar.LENGTH_LONG).show()
             } else {
                 textInputLayout.isErrorEnabled = true
                 textInputLayout.error = getString(R.string.invalid_email_message)
@@ -45,6 +50,7 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+
     fun TextInputEditText.listenChanges(block: (text: String) -> Unit) {
         addTextChangedListener(object : SimpleTextWatcher() {
             override fun afterTextChanged(s: Editable?) {
@@ -52,5 +58,6 @@ class MainActivity : AppCompatActivity() {
             }
         })
     }
+
 }
 
