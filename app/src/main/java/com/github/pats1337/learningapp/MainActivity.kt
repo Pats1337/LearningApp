@@ -4,10 +4,12 @@ package com.github.pats1337.learningapp
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
+import android.text.SpannableString
 import android.text.TextWatcher
 import android.util.Log
 import android.util.Patterns.EMAIL_ADDRESS
 import android.widget.Button
+import android.widget.CheckBox
 import android.widget.Toast
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
@@ -34,6 +36,12 @@ class MainActivity : AppCompatActivity() {
         }
 
         textInputEditText.listenChanges { textInputLayout.isErrorEnabled = false }
+
+        val checkBox = findViewById<CheckBox>(R.id.checkBox)
+        val spannableString = SpannableString(getString(R.string.agreement_full_text))
+        checkBox.text = spannableString
+        loginButton.isEnabled = false
+        checkBox.setOnCheckedChangeListener { _, isChecked -> loginButton.isEnabled = isChecked }
 
     }
 

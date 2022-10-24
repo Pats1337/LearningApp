@@ -1,7 +1,6 @@
 <resources>
     <string name="app_name">LearningApp</string>
-    <string name="agreement_full_text">By pressing next button you confirm the agreement
-    and privacy policy</string>
+    <string name="agreement_full_text">I agree with terms of use and privacy policy</string>
     <string name="confidential_info">agreement</string>
     <string name="privacy_policy">privacy policy</string>
     <string name="camera_icon">Camera icon</string>
