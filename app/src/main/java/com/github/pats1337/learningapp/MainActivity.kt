@@ -4,6 +4,8 @@ package com.github.pats1337.learningapp
 import android.app.Activity
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.text.Editable
 import android.text.SpannableString
 import android.text.TextWatcher
@@ -26,14 +28,20 @@ class MainActivity : AppCompatActivity() {
 
         val textInputLayout = findViewById<TextInputLayout>(R.id.textInputLayout)
         val textInputEditText = findViewById<TextInputEditText>(R.id.textInputEditText)
+        val contentLayout = findViewById<View>(R.id.contentLayout)
         val progressBar = findViewById<View>(R.id.progressBar)
 
         val loginButton = findViewById<Button>(R.id.loginButton)
         loginButton.setOnClickListener {
             if (EMAIL_ADDRESS.matcher(textInputEditText.text.toString()).matches()) {
                 loginButton.isEnabled = false
+                contentLayout.visibility = View.GONE
                 progressBar.visibility = View.VISIBLE
                 Snackbar.make(loginButton, "Go to postLogin", Snackbar.LENGTH_LONG).show()
+                Handler(Looper.myLooper()!!).postDelayed({
+                    contentLayout.visibility = View.VISIBLE
+                    progressBar.visibility = View.GONE
+                }, 3000)
             } else {
                 textInputLayout.isErrorEnabled = true
                 textInputLayout.error = getString(R.string.invalid_email_message)
