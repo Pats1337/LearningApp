@@ -41,6 +41,7 @@ class MainActivity : AppCompatActivity() {
                 Handler(Looper.myLooper()!!).postDelayed({
                     contentLayout.visibility = View.VISIBLE
                     progressBar.visibility = View.GONE
+                    Snackbar.make(loginButton, "Error login", Snackbar.LENGTH_LONG).show()
                 }, 3000)
             } else {
                 textInputLayout.isErrorEnabled = true
