@@ -2,6 +2,7 @@ package com.github.pats1337.learningapp
 
 
 import android.app.Activity
+import android.app.ProgressDialog.show
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
@@ -15,6 +16,7 @@ import android.view.View
 import android.widget.Button
 import android.widget.CheckBox
 import android.widget.Toast
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
 
@@ -41,7 +43,10 @@ class MainActivity : AppCompatActivity() {
                 Handler(Looper.myLooper()!!).postDelayed({
                     contentLayout.visibility = View.VISIBLE
                     progressBar.visibility = View.GONE
-                    Snackbar.make(loginButton, "Error login", Snackbar.LENGTH_LONG).show()
+                    BottomSheetDialog(this).run {
+                        setContentView(R.layout.dialog)
+                        show()
+                    }
                 }, 3000)
             } else {
                 textInputLayout.isErrorEnabled = true
