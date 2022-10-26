@@ -11,4 +11,5 @@
     <string name="valid_email_message">Correct email address</string>
     <string name="attention">Attention</string>
     <string name="service_is_unavailable">Service is unavailable</string>
+    <string name="close">close</string>
 </resources>

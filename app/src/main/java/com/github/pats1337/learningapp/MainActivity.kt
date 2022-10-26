@@ -1,7 +1,9 @@
 package com.github.pats1337.learningapp
 
 
+import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.AlertDialog
 import android.app.ProgressDialog.show
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -12,6 +14,7 @@ import android.text.SpannableString
 import android.text.TextWatcher
 import android.util.Log
 import android.util.Patterns.EMAIL_ADDRESS
+import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
 import android.widget.CheckBox
@@ -32,8 +35,12 @@ class MainActivity : AppCompatActivity() {
         val textInputEditText = findViewById<TextInputEditText>(R.id.textInputEditText)
         val contentLayout = findViewById<View>(R.id.contentLayout)
         val progressBar = findViewById<View>(R.id.progressBar)
-
         val loginButton = findViewById<Button>(R.id.loginButton)
+        val checkBox = findViewById<CheckBox>(R.id.checkBox)
+
+        loginButton.isEnabled = false
+        checkBox.setOnCheckedChangeListener { _, isChecked -> loginButton.isEnabled = isChecked }
+
         loginButton.setOnClickListener {
             if (EMAIL_ADDRESS.matcher(textInputEditText.text.toString()).matches()) {
                 loginButton.isEnabled = false
@@ -43,10 +50,12 @@ class MainActivity : AppCompatActivity() {
                 Handler(Looper.myLooper()!!).postDelayed({
                     contentLayout.visibility = View.VISIBLE
                     progressBar.visibility = View.GONE
-                    BottomSheetDialog(this).run {
-                        setContentView(R.layout.dialog)
-                        show()
-                    }
+                    val builder = AlertDialog.Builder(this)
+                    builder.setTitle(R.string.attention).setMessage(R.string.service_is_unavailable)
+                        .setNeutralButton("Cancel") { dialogInterface, which -> }
+                    val alertDialog: AlertDialog = builder.create()
+                    alertDialog.setCancelable(false)
+                    alertDialog.show()
                 }, 3000)
             } else {
                 textInputLayout.isErrorEnabled = true
@@ -55,12 +64,6 @@ class MainActivity : AppCompatActivity() {
         }
 
         textInputEditText.listenChanges { textInputLayout.isErrorEnabled = false }
-
-        val checkBox = findViewById<CheckBox>(R.id.checkBox)
-        val spannableString = SpannableString(getString(R.string.agreement_full_text))
-        checkBox.text = spannableString
-        loginButton.isEnabled = false
-        checkBox.setOnCheckedChangeListener { _, isChecked -> loginButton.isEnabled = isChecked }
 
     }
 
