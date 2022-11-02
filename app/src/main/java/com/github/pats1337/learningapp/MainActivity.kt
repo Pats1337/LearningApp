@@ -20,17 +20,28 @@ import com.google.android.material.textfield.TextInputLayout
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var textInputLayout: TextInputLayout
+    private lateinit var textInputEditText: TextInputEditText
+
+    private val textWatcher = object : SimpleTextWatcher() {
+        override fun afterTextChanged(s: Editable?) {
+            Log.d(TAG, "changed ${s.toString()}")
+            textInputLayout.isErrorEnabled = false
+        }
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         Log.d(TAG, "OnCreate ${savedInstanceState == null}")
 
-        val textInputLayout = findViewById<TextInputLayout>(R.id.textInputLayout)
-        val textInputEditText = findViewById<TextInputEditText>(R.id.textInputEditText)
         val contentLayout = findViewById<View>(R.id.contentLayout)
         val progressBar = findViewById<View>(R.id.progressBar)
         val loginButton = findViewById<Button>(R.id.loginButton)
         val checkBox = findViewById<CheckBox>(R.id.checkBox)
+
+        textInputLayout = findViewById(R.id.textInputLayout)
+        textInputEditText = textInputLayout.editText as TextInputEditText
 
         loginButton.isEnabled = false
         checkBox.setOnCheckedChangeListener { _, isChecked -> loginButton.isEnabled = isChecked }
@@ -57,21 +68,32 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        textInputEditText.listenChanges {
-            Log.d(TAG, "changed $it")
-            textInputLayout.isErrorEnabled = false
-        }
+//        textInputEditText.listenChanges {
+//            Log.d(TAG, "changed $it")
+//            textInputLayout.isErrorEnabled = false
+//        }
 
     }
 
-
-    fun TextInputEditText.listenChanges(block: (text: String) -> Unit) {
-        addTextChangedListener(object : SimpleTextWatcher() {
-            override fun afterTextChanged(s: Editable?) {
-                block.invoke(s.toString())
-            }
-        })
+    override fun onPause() {
+        super.onPause()
+        Log.d(TAG, "onPause")
+        textInputEditText.removeTextChangedListener(textWatcher)
     }
 
+    override fun onResume() {
+        super.onResume()
+        Log.d(TAG, "onResume")
+        textInputEditText.addTextChangedListener(textWatcher)
+    }
+
+
+//    fun TextInputEditText.listenChanges(block: (text: String) -> Unit) {
+//         addTextChangedListener(object : SimpleTextWatcher() {
+//             override fun afterTextChanged(s: Editable?) {
+//                 block.invoke(s.toString())
+//             }
+//         })
+//     }
 }
 
