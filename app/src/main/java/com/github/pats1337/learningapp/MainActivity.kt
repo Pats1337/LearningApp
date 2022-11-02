@@ -1,25 +1,18 @@
 package com.github.pats1337.learningapp
 
 
-import android.annotation.SuppressLint
-import android.app.Activity
 import android.app.AlertDialog
-import android.app.ProgressDialog.show
+import android.content.ContentValues.TAG
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.text.Editable
-import android.text.SpannableString
-import android.text.TextWatcher
 import android.util.Log
 import android.util.Patterns.EMAIL_ADDRESS
-import android.view.LayoutInflater
 import android.view.View
 import android.widget.Button
 import android.widget.CheckBox
-import android.widget.Toast
-import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
 
@@ -30,6 +23,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        Log.d(TAG, "OnCreate ${savedInstanceState == null}")
 
         val textInputLayout = findViewById<TextInputLayout>(R.id.textInputLayout)
         val textInputEditText = findViewById<TextInputEditText>(R.id.textInputEditText)
@@ -63,7 +57,10 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        textInputEditText.listenChanges { textInputLayout.isErrorEnabled = false }
+        textInputEditText.listenChanges {
+            Log.d(TAG, "changed $it")
+            textInputLayout.isErrorEnabled = false
+        }
 
     }
 
